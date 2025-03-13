@@ -5,9 +5,9 @@ vim.api.nvim_set_keymap('n', 'j', 'k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'k', 'j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'j', 'k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'k', 'j', { noremap = true, silent = true })
--- do it for commanline mode 
-vim.api.nvim_set_keymap('c', 'j', 'k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('c', 'k', 'j', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<C-p>', ':', { noremap = true, silent = false })
+
 
 
 local keymap = vim.keymap -- for conciseness

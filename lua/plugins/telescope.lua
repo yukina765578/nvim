@@ -27,18 +27,12 @@ return {
         path_display = { "smart" },
         mappings = {
           i = {
-            ["j"] = actions.move_selection_previous, -- move to next result
-            ["k"] = actions.move_selection_next, -- move to prev result
             ["<C-j>"] = actions.move_selection_previous, -- move to next result
             ["<C-k>"] = actions.move_selection_next, -- move to prev result
             ["<C-q>"] = function(prompt_bufnr)
               actions.send_selected_to_qflist(prompt_bufnr)
               custom_actions.open_trouble_qflist()
             end,
-          },
-          n = {
-            ["j"] = actions.move_selection_previous,
-            ["k"] = actions.move_selection_next,
           },
         },
       },
