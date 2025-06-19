@@ -25,10 +25,23 @@ return {
     telescope.setup({
       defaults = {
         path_display = { "smart" },
+        -- Hide Unity files from telescope searches
+        file_ignore_patterns = {
+          "%.meta$",
+          "%.prefab$",
+          "%.unity$",
+          "%.asset$",
+          "Library/.*",
+          "Temp/.*",
+          "Logs/.*",
+          "UserSettings/.*",
+          "obj/.*",
+          "bin/.*",
+        },
         mappings = {
           i = {
             ["<C-j>"] = actions.move_selection_previous, -- move to next result
-            ["<C-k>"] = actions.move_selection_next, -- move to prev result
+            ["<C-k>"] = actions.move_selection_next,     -- move to prev result
             ["<C-q>"] = function(prompt_bufnr)
               actions.send_selected_to_qflist(prompt_bufnr)
               custom_actions.open_trouble_qflist()

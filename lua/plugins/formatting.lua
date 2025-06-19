@@ -19,6 +19,8 @@ return {
         graphql = { "prettier" },
         liquid = { "prettier" },
         lua = { "stylua" },
+        cs = { "prettier" },
+        python = { "black" },
       },
       format_on_save = {
         lsp_fallback = true,

@@ -21,8 +21,8 @@ return {
         icons = {
           glyphs = {
             folder = {
-              arrow_closed = "", -- arrow when folder is closed
-              arrow_open = "", -- arrow when folder is open
+              arrow_closed = "", -- arrow when folder is closed
+              arrow_open = "",   -- arrow when folder is open
             },
           },
         },
@@ -38,7 +38,20 @@ return {
         },
       },
       filters = {
-        custom = { ".DS_Store" },
+        custom = {
+          ".DS_Store",
+          -- Unity files to hide
+          "*.meta",
+          "*.prefab",
+          "*.unity",
+          "*.asset",
+          "Library",
+          "Temp",
+          "Logs",
+          "UserSettings",
+          "obj",
+          "bin",
+        },
       },
       git = {
         ignore = false,
@@ -50,3 +63,4 @@ return {
     keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>")
   end
 }
+

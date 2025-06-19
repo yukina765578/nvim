@@ -1,5 +1,5 @@
 return {
-  "nvim-treesitter/nvim-treesitter", 
+  "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   config = function()
@@ -13,6 +13,7 @@ return {
         "javascript",
         "typescript",
         "markdown",
+        "c_sharp",
       },
       highlight = {
         enable = true,
