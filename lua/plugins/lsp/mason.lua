@@ -45,6 +45,7 @@ return {
 				"prettier", -- prettier formatter
 				"eslint_d",
 				"stylua", -- lua formatter
+				"csharpier", -- C# formatter
 			},
 		})
 	end,

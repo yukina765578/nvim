@@ -1,14 +1,12 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.api.nvim_set_keymap('n', 'j', 'k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'k', 'j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'j', 'k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'k', 'j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "j", "k", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "k", "j", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "j", "k", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "k", "j", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<C-p>', ':', { noremap = true, silent = false })
-
-
+vim.api.nvim_set_keymap("n", "<C-p>", ":", { noremap = true, silent = false })
 
 local keymap = vim.keymap -- for conciseness
 
@@ -27,6 +25,23 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
-keymap.set('n', '<C-a>', 'ggVG', { noremap = true, silent = true })
-keymap.set ('v', '<C-c>', '"+y', { noremap = true, silent = true })
+keymap.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
+keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
+-- Function to position current line N lines from top using count
+local function position_with_count()
+	local count = vim.v.count == 0 and 5 or vim.v.count -- Default to 5 if no count given
+
+	-- Get current cursor position
+	local cursor_line = vim.fn.line(".")
+
+	-- Set the window so cursor line appears N lines from top
+	vim.fn.winrestview({
+		topline = math.max(1, cursor_line - count + 1),
+		lnum = cursor_line,
+		col = vim.fn.col(".") - 1,
+	})
+end
+
+-- Map z followed by Enter to position that many lines from top
+vim.keymap.set("n", "z<CR>", position_with_count, { desc = "Position line N from top (5z<CR> = 5 lines from top)" })
