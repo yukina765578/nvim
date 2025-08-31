@@ -1,13 +1,29 @@
+-- lua/plugins/colors.lua
 return {
-	-- Install nightfox
-	"EdenEast/nightfox.nvim",
-	config = function()
-		require("nightfox").setup({
+	-- Nightfox (optional, still available)
+	{
+		"EdenEast/nightfox.nvim",
+		lazy = true,
+		opts = {
 			options = {
 				terminal_colors = true,
 				transparent = true,
 			},
-		})
-		vim.cmd("colorscheme dawnfox")
-	end,
+		},
+	},
+
+	-- TokyoNight (your new default)
+	{
+		"folke/tokyonight.nvim",
+		lazy = false, -- load immediately
+		priority = 1000, -- make sure it loads before others
+		opts = {
+			style = "storm", -- "storm", "moon", "night", "day"
+			transparent = true,
+		},
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
+			vim.cmd.colorscheme("tokyonight") -- set as default
+		end,
+	},
 }
