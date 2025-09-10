@@ -16,14 +16,24 @@ return {
 	{
 		"folke/tokyonight.nvim",
 		lazy = false, -- load immediately
-		priority = 1000, -- make sure it loads before others
 		opts = {
 			style = "storm", -- "storm", "moon", "night", "day"
 			transparent = true,
 		},
+	},
+	{
+		"scottmckendry/cyberdream.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = true,
+			variant = "default", -- "default", "light"
+			ittalic_comments = true,
+			borderless_pickers = true,
+		},
 		config = function(_, opts)
-			require("tokyonight").setup(opts)
-			vim.cmd.colorscheme("tokyonight") -- set as default
+			require("cyberdream").setup(opts)
+			vim.cmd.colorscheme("cyberdream") -- set as default
 		end,
 	},
 }
