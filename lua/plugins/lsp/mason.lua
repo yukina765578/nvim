@@ -37,6 +37,7 @@ return {
 				"prismals",
 				"pyright",
 				"omnisharp",
+				"ruff",
 			},
 		})
 
@@ -46,6 +47,9 @@ return {
 				"eslint_d",
 				"stylua", -- lua formatter
 				-- "csharpier", -- C# formatter
+				"black", -- python formatter
+				"mypy", -- python type checker
+				"debugpy", -- python debugger
 			},
 		})
 	end,

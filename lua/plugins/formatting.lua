@@ -30,7 +30,7 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				cs = { "csharpier" }, -- Changed from prettier to csharpier
-				python = { "black" },
+				python = { "black", "ruff" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
