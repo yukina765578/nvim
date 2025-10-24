@@ -19,7 +19,7 @@ The configuration uses modern Neovim features and is optimized for LSP-based dev
 - **File Explorer**: nvim-tree
 - **Fuzzy Finder**: telescope.nvim
 - **Git Integration**: lazygit.nvim
-- **AI Assistants**: copilot.lua, avante.nvim, claudecode.nvim
+- **AI Assistants**: copilot.lua, claudecode.nvim
 
 ## Project Structure
 ```

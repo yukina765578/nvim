@@ -54,7 +54,6 @@ This file contains version-controlled project knowledge shared across the team.
 - **lazygit**: Git integration
 - **which-key**: Keybinding helper
 - **trouble**: Diagnostics list
-- **avante**: Additional AI features
 - **claudecode.nvim**: Claude Code AI assistant integration
 
 ### Display & UI
