@@ -4,7 +4,7 @@ return {
   config = function()
     local nvimtree = require("nvim-tree")
 
-    -- recommended settings from nvim-tree documentation
+    -- essential settings from nvim-tree official docs
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 
@@ -13,7 +13,7 @@ return {
         width = 35,
         relativenumber = true,
       },
-      -- change folder arrow icons
+      -- customize folder arrow icons with nice glyphs
       renderer = {
         indent_markers = {
           enable = true,
@@ -40,7 +40,7 @@ return {
       filters = {
         custom = {
           ".DS_Store",
-          -- Unity files to hide
+          -- Unity-specific files we want to hide
           "*.meta",
           "*.prefab",
           "*.unity",

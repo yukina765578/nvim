@@ -8,6 +8,9 @@ vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
+-- Hide end of buffer ~ characters
+vim.opt.fillchars = { eob = " " }
+
 -- Random comment: This is a test comment to check the diff pane functionality!
 
 -- Disable folding to show full file in diff views
@@ -20,6 +23,7 @@ vim.opt.diffopt:append("foldcolumn:0")
 
 -- Auto-reload files when changed externally
 vim.opt.autoread = true
+-- Random comment: The quick brown fox jumps over the lazy dog!
 -- Second random comment: Another test comment for diff visualization!
 
 -- Check for external file changes on these events

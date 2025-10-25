@@ -46,12 +46,11 @@ This file contains version-controlled project knowledge shared across the team.
 ### Key Plugins
 
 - **Copilot**: AI code completion
-- **Telescope**: Fuzzy finder
+- **snacks.nvim**: Multi-purpose plugin providing picker (fuzzy finder), dashboard, notifications, terminal, explorer, and more
 - **treesitter**: Syntax parsing and highlighting
 - **nvim-cmp**: Completion engine
 - **nvim-tree**: File explorer
 - **todo-comments**: Highlight TODO/FIXME comments
-- **lazygit**: Git integration
 - **which-key**: Keybinding helper
 - **trouble**: Diagnostics list
 - **claudecode.nvim**: Claude Code AI assistant integration
@@ -59,13 +58,25 @@ This file contains version-controlled project knowledge shared across the team.
 ### Display & UI
 
 - **lualine**: Statusline
-- **bufferline**: Buffer/tab line
 - **noice**: Enhanced UI messages
-- **alpha**: Start screen
 - **mini-icons**: Icon support
 - **indent-blankline**: Indentation guides
+- **gruvbox.nvim**: Colorscheme (default, non-transparent)
+
+### Removed Plugins
+
+- **Telescope**: Replaced by snacks.nvim picker
+- **alpha**: Replaced by snacks.nvim dashboard
+- **bufferline**: Removed (no buffer/tab line)
+- **lazygit**: Snacks.nvim provides built-in lazygit integration
 
 ## Notes
+
+### UI Customization
+
+- End-of-buffer tilde characters (`~`) are hidden via `vim.opt.fillchars = { eob = " " }` in `lua/config/options.lua`
+- Gruvbox colorscheme configured with `transparent_mode = false` for solid background
+- No buffer/tab line plugin installed for cleaner UI
 
 ### Diff View Configuration
 
@@ -84,8 +95,18 @@ This file contains version-controlled project knowledge shared across the team.
 - Autocmds check for external changes on focus, buffer enter, and cursor idle events
 - Window management: Claude Code handles its own window lifecycle; avoid custom autocmds that close non-diff windows
 
+### LSP Configuration
+
+- **Neovim version**: v0.10.2 (important for LSP compatibility)
+- Using mason.nvim for LSP server package management
+- LSP servers manually configured in `lua/plugins/lsp/mason.lua` for Neovim 0.10 compatibility
+- Installed servers: lua_ls (Lua), pyright (Python)
+- LSP navigation integrated with Snacks picker (gR, gd, gi, gt keymaps)
+- **Note**: The `automatic_enable` feature in mason-lspconfig requires Neovim v0.11+; for v0.10, servers must be manually set up using `lspconfig.server_name.setup()`
+
 ### Git Integration
 
-- Using lazygit plugin for Git operations
-- Current branch: main
-- Repository is actively maintained with recent commits for Python LSP and nvim-ufo integration
+- Snacks.nvim provides built-in lazygit integration
+- Current branch: main (with feature branches like "snacks", "remove-lsp", "delete-avante")
+- Repository uses feature branches for significant changes
+- Archive directory (`archive/lsp/`) used for preserving old configurations

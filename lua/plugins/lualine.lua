@@ -1,3 +1,4 @@
+-- Statusline setup using lualine with fancy custom separators
 return {
   "nvim-lualine/lualine.nvim",
   config = function()
