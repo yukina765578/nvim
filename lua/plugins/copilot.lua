@@ -11,7 +11,7 @@ return {
 		vim.keymap.set(
 			"i",
 			"<Tab>",
-			'copilot#Accept("\\<CR>")',
+			'copilot#Accept("\\t")',
 			vim.tbl_extend("force", opts, {
 				desc = "Copilot: accept full suggestion",
 			})
