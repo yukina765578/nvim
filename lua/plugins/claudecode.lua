@@ -14,7 +14,7 @@ return {
 		-- Terminal position settings for split window
 		terminal = {
 			split_side = "right",
-			split_width_percentage = 0.30,
+			split_width_percentage = 0.2,
 			provider = "auto", -- "auto", "snacks", or "native"
 		},
 

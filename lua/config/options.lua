@@ -41,3 +41,7 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 		vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
 	end,
 })
+
+-- Edgy.nvim compatible settings
+vim.opt.laststatus = 3 -- Global statusline (required for edgy.nvim)
+vim.opt.splitkeep = "screen" -- Prevent layout jumping when opening/closing windows
