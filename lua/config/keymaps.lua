@@ -1,11 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.api.nvim_set_keymap("n", "j", "k", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "k", "j", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "j", "k", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "k", "j", { noremap = true, silent = true })
-
 vim.api.nvim_set_keymap("n", "<C-p>", ":", { noremap = true, silent = false })
 
 local keymap = vim.keymap -- for conciseness
@@ -27,6 +22,16 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 
 keymap.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
 keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
+
+-- Paste from clipboard in insert and terminal modes
+keymap.set("i", "<C-v>", "<C-r>+", { noremap = true, silent = true })
+keymap.set("t", "<C-v>", "<C-\\><C-r>+", { noremap = true, silent = true })
+
+-- Exit insert mode with Ctrl+Space
+keymap.set("i", "<C-Space>", "<Esc>", { desc = "Exit insert mode to normal mode" })
+
+-- Exit terminal mode with Ctrl+Space (doesn't send ESC to the program)
+keymap.set("t", "<C-Space>", "<C-\\><C-n>", { desc = "Exit terminal mode to normal mode" })
 
 -- Function to position current line N lines from top using count
 local function position_with_count()

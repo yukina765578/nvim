@@ -21,6 +21,16 @@ vim.opt.diffopt:remove("filler")
 vim.opt.diffopt:append("context:999999") -- large number to show all lines
 vim.opt.diffopt:append("foldcolumn:0")
 
+-- Enable line wrapping in diff mode
+vim.api.nvim_create_autocmd("OptionSet", {
+	pattern = "diff",
+	callback = function()
+		if vim.wo.diff then
+			vim.wo.wrap = true
+		end
+	end,
+})
+
 -- Auto-reload files when changed externally
 vim.opt.autoread = true
 -- Random comment: The quick brown fox jumps over the lazy dog!
@@ -45,3 +55,18 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 -- Edgy.nvim compatible settings
 vim.opt.laststatus = 3 -- Global statusline (required for edgy.nvim)
 vim.opt.splitkeep = "screen" -- Prevent layout jumping when opening/closing windows
+
+-- Clipboard configuration for WSL2
+vim.opt.clipboard = "unnamedplus"
+vim.g.clipboard = {
+	name = "WslClipboard",
+	copy = {
+		["+"] = "win32yank.exe -i --crlf",
+		["*"] = "win32yank.exe -i --crlf",
+	},
+	paste = {
+		["+"] = "win32yank.exe -o --lf",
+		["*"] = "win32yank.exe -o --lf",
+	},
+	cache_enabled = 0,
+}
