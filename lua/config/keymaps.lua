@@ -50,3 +50,7 @@ end
 
 -- Map z followed by Enter to position that many lines from top
 vim.keymap.set("n", "z<CR>", position_with_count, { desc = "Position line N from top (5z<CR> = 5 lines from top)" })
+
+-- PageUp/PageDown scroll half page instead of full page
+keymap.set({ "n", "v" }, "<PageUp>", function() vim.cmd("normal! \21") end, { desc = "Half page up" })
+keymap.set({ "n", "v" }, "<PageDown>", function() vim.cmd("normal! \4") end, { desc = "Half page down" })
