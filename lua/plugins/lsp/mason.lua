@@ -22,9 +22,12 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"pyright",
+				"biome",
 			},
 			-- Automatically enable installed servers
 			automatic_enable = true,
 		})
+
+		-- automatic_enable handles server setup on Neovim 0.11+
 	end,
 }
