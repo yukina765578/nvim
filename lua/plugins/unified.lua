@@ -1,3 +1,26 @@
+local function navigate_hunk(direction, fallback)
+  local state = require("unified.state")
+  if not state.is_active() then
+    vim.api.nvim_feedkeys(vim.keycode(fallback), "n", false)
+    return
+  end
+
+  -- If invoked from the file tree, navigate in the main diff window.
+  if vim.bo.filetype == "unified_tree" then
+    local win = state.get_main_window()
+    if win and vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_set_current_win(win)
+    end
+  end
+
+  local navigation = require("unified.navigation")
+  if direction > 0 then
+    navigation.next_hunk()
+  else
+    navigation.previous_hunk()
+  end
+end
+
 return {
   "axkirillov/unified.nvim",
   opts = {
@@ -16,23 +39,43 @@ return {
       pattern = "unified_tree",
       callback = function(ev)
         local bopts = { buffer = ev.buf, silent = true }
-        -- Enter key to open file and jump to diff pane
-        vim.keymap.set("n", "<CR>", function()
+        local function open_file()
           require("unified.file_tree.actions").toggle_node()
+
           -- Jump to the main diff window after opening
           local state = require("unified.state")
           local win = state.get_main_window()
           if win and vim.api.nvim_win_is_valid(win) then
             vim.api.nvim_set_current_win(win)
           end
+        end
+
+        -- Open the selected file and jump to its diff.
+        vim.keymap.set("n", "<CR>", open_file, bopts)
+
+        -- A single click selects; a double-click opens the file's diff.
+        vim.keymap.set("n", "<2-LeftMouse>", function()
+          local mouse = vim.fn.getmousepos()
+          if mouse.winid == 0 or mouse.line == 0 or not vim.api.nvim_win_is_valid(mouse.winid) then
+            return
+          end
+
+          local mouse_buf = vim.api.nvim_win_get_buf(mouse.winid)
+          if vim.bo[mouse_buf].filetype ~= "unified_tree" then
+            return
+          end
+
+          vim.api.nvim_set_current_win(mouse.winid)
+          local line = vim.api.nvim_buf_get_lines(mouse_buf, mouse.line - 1, mouse.line, false)[1] or ""
+          local column = math.min(math.max(mouse.column - 1, 0), #line)
+          vim.api.nvim_win_set_cursor(mouse.winid, { mouse.line, column })
+          open_file()
         end, bopts)
-        -- Disable <C-n> so it doesn't open nvim-tree
-        vim.keymap.set("n", "<C-n>", "<Nop>", bopts)
       end,
     })
   end,
   keys = {
-    { "<C-d>", function()
+    { "<leader>gd", function()
       local state = require("unified.state")
       if state.is_active() then
         local config = require("unified.config")
@@ -70,8 +113,8 @@ return {
         require("unified.command").run(ok and commit_ref or "")
       end
     end, desc = "Toggle inline diff" },
-    { "]h", function() require("unified.navigation").next_hunk() end, desc = "Next hunk" },
-    { "[h", function() require("unified.navigation").previous_hunk() end, desc = "Previous hunk" },
+    { "<Tab>", function() navigate_hunk(1, "<C-i>") end, desc = "Next hunk" },
+    { "<S-Tab>", function() navigate_hunk(-1, "<S-Tab>") end, desc = "Previous hunk" },
     { "gs", function() require("unified.hunk_actions").stage_hunk() end, desc = "Stage hunk" },
     { "gu", function() require("unified.hunk_actions").unstage_hunk() end, desc = "Unstage hunk" },
     { "gr", function() require("unified.hunk_actions").revert_hunk() end, desc = "Revert hunk" },

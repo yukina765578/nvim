@@ -14,7 +14,25 @@ return {
 			enabled = true,
 			timeout = 3000,
 		},
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			sources = {
+				explorer = {
+					win = {
+						input = {
+							keys = {
+								["<C-n>"] = { "close", mode = { "n", "i" } },
+							},
+						},
+						list = {
+							keys = {
+								["<C-n>"] = "close",
+							},
+						},
+					},
+				},
+			},
+		},
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
@@ -120,6 +138,13 @@ return {
 		-- Explorer
 		{
 			"<leader>e",
+			function()
+				Snacks.explorer()
+			end,
+			desc = "File Explorer",
+		},
+		{
+			"<C-n>",
 			function()
 				Snacks.explorer()
 			end,
