@@ -1,3 +1,12 @@
+local function focus_explorer()
+	local picker = Snacks.picker.get({ source = "explorer" })[1]
+	if picker then
+		picker:focus("list", { show = true })
+	else
+		Snacks.explorer()
+	end
+end
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -18,6 +27,7 @@ return {
 			enabled = true,
 			sources = {
 				explorer = {
+					hidden = true,
 					win = {
 						input = {
 							keys = {
@@ -135,13 +145,11 @@ return {
 			desc = "Git Log",
 		},
 
-		-- Explorer
+		-- NOTE: Open or focus the file explorer.
 		{
 			"<leader>e",
-			function()
-				Snacks.explorer()
-			end,
-			desc = "File Explorer",
+			focus_explorer,
+			desc = "Focus File Explorer",
 		},
 		{
 			"<C-n>",

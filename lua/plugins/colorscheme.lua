@@ -1,30 +1,26 @@
 -- Update 2
 -- Random comment: Always remember to save your work frequently!
 return {
-	-- Gruvbox theme (primary colorscheme for testing ClaudeCode.nvim)
+	-- Solarized Light, matched to the terminal palette
 	{
-		"ellisonleao/gruvbox.nvim",
+		"maxmx03/solarized.nvim",
 		lazy = false,
 		priority = 1000,
 		opts = {
-			terminal_colors = true,
-			transparent_mode = true,
-			contrast = "", -- can be "hard", "soft" or empty string
-			palette_overrides = {},
-			overrides = {},
-			dim_inactive = false,
-			bold = true,
-			italic = {
-				strings = false,
-				emphasis = true,
-				comments = true,
-				operators = false,
-				folds = true,
+			transparent = {
+				enabled = true,
+				pmenu = true,
+				normal = true,
+				normalfloat = true,
+				whichkey = true,
+				lazy = true,
 			},
 		},
 		config = function(_, opts)
-			require("gruvbox").setup(opts)
-			vim.cmd.colorscheme("gruvbox")
+			vim.o.termguicolors = true
+			vim.o.background = "light"
+			require("solarized").setup(opts)
+			vim.cmd.colorscheme("solarized")
 		end,
 	},
 

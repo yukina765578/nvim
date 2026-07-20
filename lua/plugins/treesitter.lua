@@ -12,6 +12,7 @@ return {
       "javascript",
       "typescript",
       "markdown",
+      "markdown_inline",
       "c_sharp",
     },
     highlight = {
